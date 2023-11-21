@@ -80,23 +80,15 @@ const getPerson = asyncHandler(async (req, res) =>{
 // Endpoint to update a person
 const updatePerson = asyncHandler(async (req, res) =>{
     try{
-        const personId = req.params.id;
-        // Check if the email already exists for another person
-        const emailExists = await Person.findOne({email: req.body.email})
-        if(emailExists){
-            return res.status(400).json({
-                success: false,
-                message: "This email is already used by another person.",
-                code: "0x0004",
-            });
-        }
-        const person = await Person.findByIdAndUpdate({_id:personId},{
-           lastName: req.body.lastName,
-           firstName: req.body.firstName,
-           email: req.body.email,
-           age: req.body.age
+        const {id, person}= req.body;
+        
+        const personn = await Person.findByIdAndUpdate({_id:id},{
+           lastName: person.lastName,
+           firstName: person.firstName,
+           email: person.email,
+           age: person.age
         });
-        if (!person) {
+        if (!personn) {
             return res.status(404).json({ 
                 success: false,
                 message: "Person not found.",
@@ -133,4 +125,15 @@ const deletePerson = asyncHandler(async (req, res)=>{
        res.status(500).send(`An error occurred: ${error.message}`); 
     }
 });
-module.exports = {addPerson, allPeople, getPerson, updatePerson, deletePerson};
+//Endpoint to filter people by age
+const filterByAge = asyncHandler(async (req, res) =>{
+    try{
+        const { age } = req.params;
+        const filteredPeople = await Person.find({ age: { $lte: age } });
+        res.json(filteredPeople);
+
+    }catch(error){
+       res.status(500).send(`An error occurred: ${error.message}`); 
+    }
+});
+module.exports = {addPerson, allPeople, getPerson, updatePerson, deletePerson, filterByAge};
