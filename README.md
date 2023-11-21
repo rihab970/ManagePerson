@@ -8,7 +8,7 @@ The **Manage Person** application is a simple MERN stack program that allows use
 2. **Remove Person:** Remove a person from the list.
 3. **Update Person:** Update the details of an existing person in the list.
 4. **View All Persons:** View a list of all persons in the system.
-5. **View Person: ** View Person Details.
+5. **View Person:** View Person Details.
 
 ## Technologies Used
 
@@ -34,6 +34,7 @@ Make sure you have the following installed on your machine:
   git clone https://github.com/rihab970/ManagePerson.git
    cd ManagePerson
 2. Start the application:
+
 # Start the server
 cd backend
 npm start
