@@ -33,6 +33,8 @@ Make sure you have the following installed on your machine:
    ```bash
   git clone https://github.com/rihab970/ManagePerson.git
    cd ManagePerson
+
+   
 2. Start the application:
 
 # Start the server
